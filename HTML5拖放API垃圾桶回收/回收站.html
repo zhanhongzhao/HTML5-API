@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#container {
+				width: 300px;
+				height: 250px;
+				border: 1px solid;
+				float: left;
+			}
+			#recycle {
+				width: 200px;
+				height: 200px;
+				float: left;
+				background-image: url(image/recycle.jpg);
+			}
+			.folder {
+				width: 100px;
+				height: 80px;
+				line-height: 80px;
+				text-align: center;
+				float: left;
+				margin: 20px;
+				background-image: url(image/folder.png);
+			}
+		</style>
+	</head>
+	<body>
+		<h1>仿回收站效果的设计与实现</h1>
+		<hr />
+		<div id="container">
+			<div class="folder" id="f1" draggable="true" ondragstart="dragstart(event)">文件夹1</div>
+			<div class="folder" id="f2" draggable="true" ondragstart="dragstart(event)">文件夹2</div>
+			<div class="folder" id="f3" draggable="true" ondragstart="dragstart(event)">文件夹3</div>
+			<div class="folder" id="f4" draggable="true" ondragstart="dragstart(event)">文件夹4</div>
+
+		</div>
+		<div id="recycle" ondragover="allowDrop(event)" ondrop="drop(event)"></div>
+		<script type="text/javascript">
+			//ondragover事件回调函数
+			function allowDrop(ev) {
+				ev.preventDefault();
+			}
+			
+			//ondragstart事件回调函数
+			function dragstart(ev)
+			{
+				ev.dataTransfer.setData("text",ev.target.id);
+			}
+			//ondrog事件回调函数
+			function drop(ev)
+			{
+				ev.preventDefault();
+				var data=ev.dataTransfer.getData("text")
+				var floder = document.getElementById(data)
+				document.getElementById("container").removeChild(floder);
+			}
+		</script>
+	</body>
+</html>
